@@ -167,14 +167,15 @@ const CERTS = [
   "Инженер по тестированию — Яндекс Практикум (2021)",
 ];
 
-const METRICS = [
-  "$40M+ совокупной выручки созданных продуктов",
-  "400+ сотрудников под управлением",
-  "25,000+ обученных студентов",
-  "30 дней — средний срок создания MVP",
-  "6 международных рынков (Россия, США, ОАЭ, UK, ЕС, MENA)",
-  "1 государственный проект федерального уровня",
+const HIGHLIGHTS = [
+  { value: "$40M+", label: "совокупной выручки созданных продуктов" },
+  { value: "400+", label: "человек в управлении (кросс-функц. команды)" },
+  { value: "25,000+", label: "обученных студентов" },
+  { value: "2", label: "раунда инвестиций суммарно $10.5M" },
+  { value: "30 дней", label: "средний срок сборки MVP" },
+  { value: "6", label: "международных рынков (RU/US/UAE/UK/EU/MENA)" },
 ];
+
 
 function Chip({ children }) {
   return <span className="chip">{children}</span>;
@@ -208,7 +209,7 @@ export default function App() {
   return (
     <div className="page">
       <header className="header">
-        <div className="avatar" aria-label="Фото (placeholder)" />
+        <img className="avatar" src="./photo.jpg" alt="Екатерина Ефимчук" />
         <div className="header__content">
           <h1 className="h1">Ефимчук Екатерина Александровна</h1>
           <div className="subtitle">CPO / Head of Product</div>
@@ -246,12 +247,15 @@ export default function App() {
           </p>
         </Section>
 
-        <Section title="Ключевые метрики карьеры">
-          <ul className="ul">
-            {METRICS.map((m) => (
-              <li key={m}>{m}</li>
+        <Section title="Highlights">
+          <div className="hiGrid">
+            {HIGHLIGHTS.map((h) => (
+              <div key={h.label} className="hiCard">
+                <div className="hiValue">{h.value}</div>
+                <div className="hiLabel muted">{h.label}</div>
+              </div>
             ))}
-          </ul>
+          </div>
         </Section>
 
         <Section title="Опыт работы">

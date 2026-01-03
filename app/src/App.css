@@ -41,6 +41,9 @@ a:hover { text-decoration: underline; }
   border-radius: 22px;
   background: #f1f5f9;
   border: 1px solid var(--border);
+  object-fit: cover;
+  box-shadow: var(--shadow);
+  background: #f1f5f9;
 }
 
 .header__content { min-width: 0; }
@@ -190,4 +193,38 @@ a:hover { text-decoration: underline; }
   }
   .avatar { width: 92px; height: 92px; border-radius: 18px; }
   .h1 { font-size: 28px; }
+}
+.hiGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.hiCard {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 14px 14px;
+  background: linear-gradient(180deg, rgba(37, 99, 235, 0.08), rgba(255, 255, 255, 1));
+}
+
+.hiValue {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #1d4ed8;
+}
+
+.hiLabel {
+  font-size: 13px;
+  margin-top: 6px;
+  line-height: 1.35;
+}
+
+@media (max-width: 860px) {
+  .hiGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 520px) {
+  .hiGrid { grid-template-columns: 1fr; }
 }
