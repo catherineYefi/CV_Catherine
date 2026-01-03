@@ -347,7 +347,7 @@ export default function App() {
           <p className="p">{PROFILE}</p>
         </Section>
 
-        <Section title="Ключевые метрики карьеры" hint="Short & punchy — чтобы сразу считывался уровень">
+        <Section title="Ключевые метрики карьеры">
           <div className="hiGrid">
             {CAREER_METRICS.map((h) => (
               <div key={h.label} className="hiCard hiCard--accent">
@@ -358,18 +358,7 @@ export default function App() {
           </div>
         </Section>
 
-        <Section title="Core Stack" hint="Что я делаю руками + чем управляю + чем усиливаю продукт">
-          <div className="stackGrid">
-            {CORE_STACK.map((s) => (
-              <div key={s.k} className="stackCard">
-                <div className="stackKey">{s.k}</div>
-                <div className="stackVal muted">{s.v}</div>
-              </div>
-            ))}
-          </div>
-        </Section>
-
-        <Section title="Опыт работы" hint="Раскрывай роли — внутри вклад, инициативы и результаты">
+        <Section title="Опыт работы">
           <div className="stack">
             {EXPERIENCE.map((job, idx) => (
               <AccordionItem
@@ -456,21 +445,29 @@ export default function App() {
           </div>
         </Section>
 
-        <Section title="Образование">
+        <div className="twoCol">
+          <Section title="Core Stack">
+            <div className="stackGrid">
+             {CORE_STACK.map((s) => (
+                <div key={s.k} className="stackCard">
+                  <div className="stackKey">{s.k}</div>
+                  <div className="stackVal muted">{s.v}</div>
+                </div>
+            ))}
+          </div>
+        </Section>
+
+        <Section title="Образование и сертификации">
           <ul className="ul">
             {EDUCATION.map((e) => (
               <li key={e}>{e}</li>
             ))}
-          </ul>
-        </Section>
-
-        <Section title="Сертификации">
-          <ul className="ul">
             {CERTS.map((c) => (
-              <li key={c}>{c}</li>
+            <li key={c}>{c}</li>
             ))}
           </ul>
         </Section>
+      </div>
 
         <footer className="footer muted">Сделано на React · GitHub Pages</footer>
       </main>
