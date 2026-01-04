@@ -1,8 +1,4 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-
-// ⚠️ Фото
-// 1) Положи файл Photo CV.jpeg сюда: app/src/assets/photo-cv.jpeg
-// 2) Либо переименуй как ниже (строго совпадение имени)
 import photo from "./assets/photo-cv.jpeg";
 
 /**
@@ -228,6 +224,13 @@ function ListBlock({ title, lines }) {
 }
 
 export default function App() {
+  // ====== THEME STATE ======
+  const [theme, setTheme] = useState("light");
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
+
   // ====== HERO ======
   const name = "Ефимчук Екатерина Александровна";
   const role = "Chief Product Officer / Head of Product";
@@ -411,7 +414,7 @@ export default function App() {
     title: "Chief Product Officer / Chief Delivery Officer — Экосистема продуктов Михаила Дашкиева",
     meta: "08.2023 — н.в. (2 года 6 месяцев) · Мастер-группа · ScaleUP · Фокус · Путь Домой · Нечто Ultima",
     summary:
-      "Образовательные и консалтинговые программы для предпринимателе...система с общим управлением стратегией, экономикой и delivery.",
+      "Образовательные и консалтинговые программы для предпринимателей с оборотом от 0 до 1B+. Единая продуктовая экосистема с общим управлением стратегией, экономикой и delivery.",
     tags: ["CPO", "P&L", "Delivery"],
     content: (
       <>
@@ -508,7 +511,7 @@ export default function App() {
             <li>25 000+ учеников по миру.</li>
             <li>Конверсия в онлайн-продажах доведена до уровней офлайна (70–90%).</li>
             <li className="quote">
-              <strong>🔹 Ключевой инсайт, из которого вырос мой продуктовый путь:</strong>
+              <strong>Ключевой инсайт, из которого вырос мой продуктовый путь:</strong>
               <br />
               «Проще научить продажника кодить, чем кодера продавать» — с этого момента продукты проектировались от продаж и реального спроса, а не от абстрактных программ.
             </li>
@@ -816,6 +819,13 @@ export default function App() {
                   <span>GitHub Pages</span>
                 </a>
               </div>
+
+              <button
+                className="theme-toggle"
+                onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+              >
+                {theme === "light" ? "🌙 Dark mode" : "☀️ Light mode"}
+              </button>
             </div>
 
             <div className="hero__right">
@@ -830,7 +840,7 @@ export default function App() {
         </section>
 
         {/* Selected Impact */}
-        <Section id="impact" title="🎯 Selected Impact" subtitle="Коротко, мощно, без таймлайна">
+        <Section id="impact" title="Selected Impact">
           <div className="impactGrid">
             {selectedImpact.map((b) => (
               <div key={b.title} className="card impactCard hiCard">
@@ -858,14 +868,13 @@ export default function App() {
         <Section
           id="experience"
           title="Experience"
-          subtitle="Строго по хронологии · аккордеоны"
           right={<Badge tone="accent">Expand/Collapse</Badge>}
         >
           <AccordionGroup items={experienceItems} allowMulti={true} controls={true} />
         </Section>
 
         {/* Completed Cases */}
-        <Section id="cases" title="Завершённые кейсы" subtitle="ПОЛНАЯ ГЛУБИНА (аккордеоны)">
+        <Section id="cases" title="Завершённые кейсы">
           <AccordionGroup items={completedCasesItems} allowMulti={true} controls={true} />
         </Section>
 
