@@ -112,6 +112,18 @@ function Icon({ name }) {
           <path d="M9 2a7 7 0 1 0 5 12 9 9 0 0 1-5-12Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
         </svg>
       );
+    case "plus":
+      return (
+        <svg {...common} width={16} height={16}>
+          <path d="M8 3v10M3 8h10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+        </svg>
+      );
+    case "minus":
+      return (
+        <svg {...common} width={16} height={16}>
+          <path d="M3 8h10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+        </svg>
+      );
     default:
       return null;
   }
@@ -156,9 +168,8 @@ function AccordionItem({
             </div>
           ) : null}
         </div>
-        <div className="acc__chev" aria-hidden="true">
-          <span />
-          <span />
+        <div className="acc__icon" aria-hidden="true">
+          <Icon name={open ? "minus" : "plus"} />
         </div>
       </button>
 
@@ -920,8 +931,8 @@ export default function App() {
           </div>
         </section>
 
-        {/* Selected Impact */}
-        <Section id="impact" title="Selected Impact">
+        {/* Key Achievements */}
+        <Section id="impact" title="Key Achievements">
           <div className="impactGrid">
             {selectedImpact.map((b) => (
               <div key={b.title} className="card impactCard hiCard">
