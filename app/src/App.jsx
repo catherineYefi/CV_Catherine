@@ -99,6 +99,19 @@ function Icon({ name }) {
           />
         </svg>
       );
+    case "sun":
+      return (
+        <svg {...common} width={16} height={16}>
+          <circle cx="8" cy="8" r="3" stroke="currentColor" strokeWidth="1.5" />
+          <path d="M8 1v2M8 13v2M15 8h-2M3 8H1M12.5 3.5l-1.4 1.4M4.9 11.1l-1.4 1.4M12.5 12.5l-1.4-1.4M4.9 4.9L3.5 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+        </svg>
+      );
+    case "moon":
+      return (
+        <svg {...common} width={16} height={16}>
+          <path d="M9 2a7 7 0 1 0 5 12 9 9 0 0 1-5-12Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+        </svg>
+      );
     default:
       return null;
   }
@@ -219,6 +232,70 @@ function ListBlock({ title, lines }) {
           <li key={idx}>{l}</li>
         ))}
       </ul>
+    </div>
+  );
+}
+
+function ScrollProgress() {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const updateProgress = () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = (scrollTop / docHeight) * 100;
+      setProgress(scrolled);
+    };
+
+    window.addEventListener("scroll", updateProgress);
+    return () => window.removeEventListener("scroll", updateProgress);
+  }, []);
+
+  return <div className="scroll-progress" style={{ width: `${progress}%` }} />;
+}
+
+function MobileNav() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const sections = [
+    { id: "impact", label: "Impact" },
+    { id: "metrics", label: "Metrics" },
+    { id: "experience", label: "Experience" },
+    { id: "cases", label: "Cases" },
+    { id: "stack", label: "Stack" },
+    { id: "edu", label: "Education" },
+  ];
+
+  const handleClick = (id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    setIsOpen(false);
+  };
+
+  return (
+    <div className="mobile-nav">
+      <button
+        className="mobile-nav__toggle"
+        onClick={() => setIsOpen(!isOpen)}
+        aria-label="Navigation menu"
+      >
+        <span />
+        <span />
+        <span />
+      </button>
+
+      {isOpen && (
+        <div className="mobile-nav__dropdown">
+          {sections.map((section) => (
+            <button
+              key={section.id}
+              className="mobile-nav__item"
+              onClick={() => handleClick(section.id)}
+            >
+              {section.label}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
@@ -775,6 +852,8 @@ export default function App() {
 
   return (
     <div className="page">
+      <ScrollProgress />
+      
       <header className="topbar">
         <div className="container topbar__inner">
           <div className="brand">CV</div>
@@ -786,6 +865,7 @@ export default function App() {
             <a href="#stack">Stack</a>
             <a href="#edu">Education</a>
           </nav>
+          <MobileNav />
         </div>
       </header>
 
@@ -824,7 +904,8 @@ export default function App() {
                 className="theme-toggle"
                 onClick={() => setTheme(theme === "light" ? "dark" : "light")}
               >
-                {theme === "light" ? "🌙 Dark mode" : "☀️ Light mode"}
+                <Icon name={theme === "light" ? "moon" : "sun"} />
+                <span>{theme === "light" ? "Dark mode" : "Light mode"}</span>
               </button>
             </div>
 
