@@ -586,7 +586,14 @@ a:hover{ text-decoration: underline; }
   font-weight: 900; 
   font-size: 13px; 
   margin-bottom: 10px; 
-  color: var(--text); 
+  color: var(--text);
+  display: flex;
+  align-items: center;
+}
+
+.block__title .icon {
+  color: rgba(6,182,212,0.95);
+  flex-shrink: 0;
 }
 
 .ul{

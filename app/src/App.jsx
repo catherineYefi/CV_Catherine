@@ -124,6 +124,24 @@ function Icon({ name }) {
           <path d="M3 8h10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
         </svg>
       );
+    case "graduation":
+      return (
+        <svg {...common} width={18} height={18}>
+          <path d="M2 7l10-4 10 4-10 4-10-4z" fill="currentColor" opacity="0.2" />
+          <path d="M2 7l10-4 10 4-10 4-10-4z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M6 10v4c0 1.1 2.7 2 6 2s6-.9 6-2v-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+        </svg>
+      );
+    case "certificate":
+      return (
+        <svg {...common} width={18} height={18}>
+          <rect x="3" y="4" width="18" height="14" rx="2" stroke="currentColor" strokeWidth="1.5" fill="none" />
+          <path d="M7 9h10M7 13h7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+          <circle cx="16" cy="16" r="4" fill="currentColor" opacity="0.2" />
+          <circle cx="16" cy="16" r="4" stroke="currentColor" strokeWidth="1.5" fill="none" />
+          <path d="M16 14v2l1.5 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      );
     default:
       return null;
   }
@@ -269,12 +287,12 @@ function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
 
   const sections = [
-    { id: "impact", label: "Impact" },
-    { id: "metrics", label: "Metrics" },
-    { id: "experience", label: "Experience" },
-    { id: "cases", label: "Cases" },
-    { id: "stack", label: "Stack" },
-    { id: "edu", label: "Education" },
+    { id: "impact", label: "Достижения" },
+    { id: "metrics", label: "Метрики" },
+    { id: "experience", label: "Опыт" },
+    { id: "cases", label: "Кейсы" },
+    { id: "stack", label: "Стек" },
+    { id: "edu", label: "Образование" },
   ];
 
   const handleClick = (id) => {
@@ -335,36 +353,36 @@ export default function App() {
     {
       title: "ULTIMA (экосистема Михаила Дашкиева)",
       lines: [
-        "Запуск и пересборка флагманского продукта → 20 млн ₽ выручки за 3 недели (8 сезон).",
-        "Запуск новой продуктовой линейки ULTIMA 9.0 → 1 млн ₽ предоплат за 7 дней, 10 млн ₽ контрактов без маркетингового запуска.",
+        "Запуск и пересборка флагманского продукта → 20 млн ₽ выручки за 3 недели (8 сезон)",
+        "Запуск новой продуктовой линейки ULTIMA 9.0 → 1 млн ₽ предоплат за 7 дней, 10 млн ₽ контрактов без маркетингового запуска",
       ],
     },
     {
       title: "Kodland (EdTech, офлайн → онлайн)",
       lines: [
-        "Масштабирование образовательного бизнеса → рост оборота с ~1 млн ₽ до ~30 млн ₽/мес.",
-        "Пересборка онлайн-модели продаж → рост конверсии до уровней офлайна (70–90%).",
+        "Масштабирование образовательного бизнеса → рост оборота с ~1 млн ₽ до ~30 млн ₽/мес",
+        "Пересборка онлайн-модели продаж → рост конверсии до уровней офлайна (70–90%)",
       ],
     },
     {
       title: "IQIDO Predictive Analytics (B2B, AI / ML)",
       lines: [
-        "Продукт предиктивной аналитики для управленческих решений → ML-модели, LTV/ROI-симуляторы,",
-        "корпоративный интерес и коммерческий оффер (NDA).",
+        "Продукт предиктивной аналитики для управленческих решений → ML-модели, LTV/ROI-симуляторы",
+        "Корпоративный интерес и коммерческий оффер (NDA)",
       ],
     },
     {
       title: "GovTech / EdTech — «Путь Думой»",
       lines: [
-        "Запуск федерального образовательного продукта → 30 дней от идеи до запуска,",
-        "30 участников при поддержке государственных структур.",
+        "Запуск федерального образовательного продукта → 30 дней от идеи до запуска",
+        "30 участников при поддержке государственных структур",
       ],
     },
     {
       title: "VisaTier (Fintech / LegalTech)",
       lines: [
-        "ROI-симулятор и AI-подсказки → рост качества квалификации лидов ~40%.",
-        "Voice-AI и n8n-автоматизации → снижение операционной нагрузки менеджеров до −60%.",
+        "ROI-симулятор и AI-подсказки → рост качества квалификации лидов ~40%",
+        "Voice-AI и n8n-автоматизации → снижение операционной нагрузки менеджеров до −60%",
       ],
     },
   ];
@@ -869,12 +887,12 @@ export default function App() {
         <div className="container topbar__inner">
           <div className="brand">CV</div>
           <nav className="nav">
-            <a href="#impact">Impact</a>
-            <a href="#metrics">Metrics</a>
-            <a href="#experience">Experience</a>
-            <a href="#cases">Cases</a>
-            <a href="#stack">Stack</a>
-            <a href="#edu">Education</a>
+            <a href="#impact">Достижения</a>
+            <a href="#metrics">Метрики</a>
+            <a href="#experience">Опыт</a>
+            <a href="#cases">Кейсы</a>
+            <a href="#stack">Стек</a>
+            <a href="#edu">Образование</a>
           </nav>
           <MobileNav />
         </div>
@@ -905,10 +923,6 @@ export default function App() {
                   <Icon name="tg" />
                   <span>{contact.telegram}</span>
                 </a>
-                <a className="chipLink" href={contact.site} target="_blank" rel="noreferrer">
-                  <Icon name="link" />
-                  <span>GitHub Pages</span>
-                </a>
               </div>
 
               <button
@@ -931,8 +945,8 @@ export default function App() {
           </div>
         </section>
 
-        {/* Key Achievements */}
-        <Section id="impact" title="Key Achievements">
+        {/* Ключевые достижения */}
+        <Section id="impact" title="Ключевые достижения">
           <div className="impactGrid">
             {selectedImpact.map((b) => (
               <div key={b.title} className="card impactCard hiCard">
@@ -959,14 +973,14 @@ export default function App() {
         {/* Experience */}
         <Section
           id="experience"
-          title="Experience"
+          title="Опыт работы"
           right={<Badge tone="accent">Expand/Collapse</Badge>}
         >
           <AccordionGroup items={experienceItems} allowMulti={true} controls={true} />
         </Section>
 
         {/* Completed Cases */}
-        <Section id="cases" title="Завершённые кейсы">
+        <Section id="cases" title="Продуктовые кейсы">
           <AccordionGroup items={completedCasesItems} allowMulti={true} controls={true} />
         </Section>
 
@@ -988,7 +1002,10 @@ export default function App() {
         <Section id="edu" title="Образование">
           <div className="eduGrid">
             <div className="card">
-              <div className="block__title">🎓 Высшее образование</div>
+              <div className="block__title">
+                <Icon name="graduation" />
+                <span style={{ marginLeft: '8px' }}>Высшее образование</span>
+              </div>
               <ul className="ul">
                 {higherEdu.map((l, idx) => (
                   <li key={idx}>{l}</li>
@@ -997,7 +1014,10 @@ export default function App() {
             </div>
 
             <div className="card">
-              <div className="block__title">📚 Дополнительные сертификации</div>
+              <div className="block__title">
+                <Icon name="certificate" />
+                <span style={{ marginLeft: '8px' }}>Дополнительные сертификации</span>
+              </div>
               <ul className="ul">
                 {certs.map((l, idx) => (
                   <li key={idx}>{l}</li>
