@@ -283,6 +283,63 @@ function ScrollProgress() {
   return <div className="scroll-progress" style={{ width: `${progress}%` }} />;
 }
 
+function BackToTop() {
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrolled = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercent = (scrolled / docHeight) * 100;
+      setShow(scrollPercent > 30); // Показываем после 30% скролла
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  if (!show) return null;
+
+  return (
+    <button
+      className="back-to-top"
+      onClick={scrollToTop}
+      aria-label="Вернуться наверх"
+    >
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    </button>
+  );
+}
+
+function CopyableContact({ type, value, href, children }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+    try {
+      await navigator.clipboard.writeText(value);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      // Fallback: открыть ссылку если копирование не сработало
+      window.location.href = href;
+    }
+  };
+
+  return (
+    <a className="chipLink copyable" href={href} onClick={handleClick}>
+      {children}
+      {copied && <span className="copied-badge">Copied!</span>}
+    </a>
+  );
+}
+
 function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -882,6 +939,7 @@ export default function App() {
   return (
     <div className="page">
       <ScrollProgress />
+      <BackToTop />
       
       <header className="topbar">
         <div className="container topbar__inner">
@@ -915,14 +973,23 @@ export default function App() {
               </div>
 
               <div className="hero__contacts">
-                <a className="chipLink" href={`mailto:${contact.email}`}>
+                <CopyableContact
+                  type="email"
+                  value={contact.email}
+                  href={`mailto:${contact.email}`}
+                >
                   <Icon name="mail" />
                   <span>{contact.email}</span>
-                </a>
-                <a className="chipLink" href={`https://t.me/${contact.telegram.replace("@", "")}`} target="_blank" rel="noreferrer">
+                </CopyableContact>
+
+                <CopyableContact
+                  type="telegram"
+                  value={contact.telegram}
+                  href={`https://t.me/${contact.telegram.replace("@", "")}`}
+                >
                   <Icon name="tg" />
                   <span>{contact.telegram}</span>
-                </a>
+                </CopyableContact>
               </div>
 
               <button
@@ -932,11 +999,26 @@ export default function App() {
                 <Icon name={theme === "light" ? "moon" : "sun"} />
                 <span>{theme === "light" ? "Dark mode" : "Light mode"}</span>
               </button>
+
+              <a
+                className="download-pdf"
+                href="/CV_Catherine/Catherine_Efimchuk_CV.pdf"
+                download="Catherine_Efimchuk_CV.pdf"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                <span>Download PDF</span>
+              </a>
             </div>
 
             <div className="hero__right">
               <div className="hero__photoWrap">
-                <img className="hero__photo" src={photo} alt="Photo" />
+                <img 
+                  className="hero__photo" 
+                  src={photo} 
+                  alt="Фотография Екатерины Ефимчук, Chief Product Officer" 
+                />
               </div>
               <div className="hero__note">
                 Отвечаю за создание и масштабирование сложных продуктовых систем — от product framing и CJM — до data-архитектуры, ML-моделей, API-интеграций, устойчивой выручки, AI-автоматизации и управляемого delivery.
@@ -1048,9 +1130,21 @@ export default function App() {
           <div className="footer__inner">
             <div>© {new Date().getFullYear()} {name}</div>
             <div className="footer__links">
-              <a href={`mailto:${contact.email}`}>{contact.email}</a>
+              <CopyableContact
+                type="email"
+                value={contact.email}
+                href={`mailto:${contact.email}`}
+              >
+                <span>{contact.email}</span>
+              </CopyableContact>
               <span className="dot">•</span>
-              <a href={`https://t.me/${contact.telegram.replace("@", "")}`} target="_blank" rel="noreferrer">{contact.telegram}</a>
+              <CopyableContact
+                type="telegram"
+                value={contact.telegram}
+                href={`https://t.me/${contact.telegram.replace("@", "")}`}
+              >
+                <span>{contact.telegram}</span>
+              </CopyableContact>
             </div>
           </div>
         </footer>
