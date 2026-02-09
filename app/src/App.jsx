@@ -575,7 +575,7 @@ export default function App() {
   const mdEcosystem = {
     id: "exp-md",
     title: "Chief Product Officer / Chief Delivery Officer — Экосистема продуктов Михаила Дашкиева",
-    meta: "08.2023 — н.в. (2 года 6 месяцев) · Мастер-группа · ScaleUP · Фокус · Путь Домой · Нечто Ultima",
+    meta: "08.2023 — н.в. (2 года 7 месяцев) · Мастер-группа · ScaleUP · Фокус · Путь Домой · Нечто Ultima",
     summary:
       "Образовательные и консалтинговые программы для предпринимателей с оборотом от 0 до 1B+. Единая продуктовая экосистема с общим управлением стратегией, экономикой и delivery.",
     tags: ["CPO", "P&L", "Delivery"],
